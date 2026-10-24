@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Linux tutorials, open-source tools, practical technology guides and honest explainers.">
+<meta name="theme-color" content="#101313">
+<title>Back Up Your Dotfiles with Git - Kernel & Craft</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/magazine.css">
+<style>
+.article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.dotfile-list {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.dotfile-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    padding: 10px;
+    background: var(--card-bg);
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.dotfile-item:hover {
+    background: var(--bg);
+    transform: translateX(5px);
+}
+
+.dotfile-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.config-icon { background: #e8f5e9; color: #2e7d32; }
+.bashrc-icon { background: #fff3e0; color: #ef6c00; }
+.editor-icon { background: #e3f2fd; color: #1565c0; }
+.gitignore-icon { background: #fce4ec; color: #c2185b; }
+.screenrc-icon { background: #f3e5f5; color: #7b1fa2; }
+
+.command-block {
+    background: #2d2d2d;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 20px 0;
+    white-space: pre-wrap;
+}
+
+.setup-guide {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-left: 4px solid var(--green);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.dark-mode .setup-guide {
+    background: linear-gradient(135deg, #1b5e20, #0a2e0a);
+    color: #e8f5e9;
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="trendbar"><div class="trend-inner"><span class="trend-label">TRENDING NOW</span><a href="../index.html">Back Up Your Dotfiles with Git</a><div class="trend-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="#privacy">Privacy Policy</a><a class="social" href="https://github.com/" aria-label="GitHub">◉</a><a class="social" href="https://x.com/" aria-label="X">𝕏</a></div></div></div>
+<header class="masthead"><div class="mast-inner"><a class="brand" href="../"><span class="brand-icon"><span>›_</span></span><span><strong>Kernel <i>&</i> Craft</strong><small>Linux Tutorials, Guides &amp; Tech Insights</small></span></a><a class="ad-banner" href="#latest"><span class="ad-terminal">›_</span><span class="ad-main"><b>Master Linux.</b><strong>One command at a time.</strong></span><span class="ad-copy">Practical tutorials and guides<br>for real-world use.</span><span class="ad-button">Explore Now <b>↗</b></span></a></div></header>
+<nav class="nav-bar" aria-label="Main navigation"><div class="nav-inner"><a class="home-link" href="../" aria-label="Home">⌂</a><div class="nav-items"><a href="#topics">Linux <span>⌄</span></a><a href="#latest">Tutorials <span>⌄</span></a><a href="#topics">System Admin <span>⌄</span></a><a href="#latest">DevOps <span>⌄</span></a><a href="#latest">Software</a><a href="#latest">Hardware</a><a href="#latest">News</a><a href="#topics">More <span>⌄</span></a></div><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☾</button><button class="search-toggle" id="search-toggle" aria-label="Focus search">⌕</button><button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></div></nav>
+
+<main id="main" class="page-wrap">
+<div class="article-content">
+<span class="category-pill">WORKFLOW</span>
+<h1>Back Up Your Dotfiles with Git</h1>
+<div class="meta-light"><span>◷ April 6, 2026</span><span>● Kernel & Craft</span><span>◉ 6 min read</span></div>
+
+<img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=1200&q=85" alt="Developer tools and dotfiles">
+
+<p>Dotfiles (dotfiles) are those hidden configuration files in your home directory that customize your development environment. From .bashrc and .vimrc to .config/ settings, these files define your personalized workspace. Losing access to these configurations can be devastating, but backing them up with Git is a simple, robust solution that ensures you always have access to your perfect setup.</p>
+
+<div class="dotfile-list">
+<h3>Essential Dotfiles to Back Up</h3>
+<div class="dotfile-item">
+<div class="dotfile-icon config-icon"></div>
+<div><strong>.bashrc / .zshrc</strong> - Shell configuration for bash or zsh</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon bashrc-icon">⌗</div>
+<div><strong>.bash_profile</strong> - Shell profile executed for login shells</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon editor-icon">◎</div>
+<div><strong>.vimrc / .config/nvim/init.vim</strong> - Editor configuration</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon gitignore-icon">✈</div>
+<div><strong>.gitignore</strong> - Prevents accidental commits of unwanted files</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon screenrc-icon">□</div>
+<div><strong>.screenrc / .tmux.conf</strong> - Terminal multiplexer settings</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon config-icon"></div>
+<div><strong>Personal configs in ~/.config</strong> - GUI application settings (wezterm, vscode, etc.)</div>
+</div>
+</div>
+
+<h2>Step-by-Step Setup</h2>
+
+<div class="setup-guide">
+<h3><span>◷</span> Create Your Dotfiles Repository</h3>
+<div class="command-block"># Create a new repository (do this on your local machine)
+mkdir ~/projects/dotfiles
+cd ~/projects/dotfiles
+git init
+git add ~/.bashrc ~/.zshrc ~/.bash_profile 2>/dev/null
+git add ~/.vimrc ~/.config/nvim/init.vim 2>/dev/null
+git add ~/.config/wezterm 2>/dev/null
+git add ~/.config/Code/User/settings.json 2>/dev/null
+git add ~/.screenrc ~/.tmux.conf 2>/dev/null
+git add .gitignore 2>/dev/null
+
+git commit -m "Initial dotfiles backup"
+
+# Back up existing configs
+cp -a ~/.bashrc ~/projects/dotfiles/
+cp -a ~/.zshrc ~/projects/dotfiles/ 2>/dev/null
+cp -a ~/.bash_profile ~/projects/dotfiles/ 2>/dev/null
+
+# Create symlinks for active use
+ln -sf ~/projects/dotfiles/.bashrc ~/.bashrc
+ln -sf ~/projects/dotfiles/.zshrc ~/.zshrc 2>/dev/null
+ln -sf ~/projects/dotfiles/.bash_profile ~/.bash_profile
+
+# Add symlink management to your shell init (optional but recommended)
+cat >> ~/.bashrc << 'EOF'
+
+# Auto-update dotfiles symlinks
+if [ -d "$HOME/projects/dotfiles" ]; then
+    for file in "$HOME/projects/dotfiles"/.*; do
+        filename=$(basename "$file")
+        if [ -f "$file" ] && [ ! -L "~$filename" ]; then
+            ln -sf "$file" "~$filename"
+        fi
+    done
+fi
+EOF</div>
+</div>
+
+<h2>Advanced Configuration</h2>
+
+<p><strong>Git Configuration for Dotfiles</strong></p>
+<div class="command-block"># Configure git for dotfiles repository
+git config user.name "Your Name"
+git config user.email "your.email@example.com"
+
+# Create a separate git user for public dotfiles (optional)
+git config user.name "Your Public Dotfiles"
+git config user.email "public@dotfiles.example.com"
+git config --global credential.helper "store"</div>
+
+<p><strong>Structured Dotfiles Repository</strong></p>
+<div class="command-block"># Create a well-organized structure
+mkdir -p config/shell
+mkdir -p config/editor
+mkdir -p config/gui
+mkdir -p scripts
+
+# Move files to organized structure
+cp ~/.bashrc config/shell/bashrc
+cp ~/.vimrc config/editor/vimrc
+cp ~/.zshrc config/shell/zshrc 2>/dev/null
+
+# Create a README for future maintenance
+cat > README.md << 'EOF'
+# My Dotfiles
+
+This repository contains configuration files for my development environment.
+
+## Usage
+
+These files are symlinked to your home directory. To switch between different
+configurations, replace the symlinks.
+
+## Files
+
+- `config/shell/` - Shell configurations (.bashrc, .zshrc, etc.)
+- `config/editor/` - Editor configurations (.vimrc, .config/nvim/init.vim, etc.)
+- `config/gui/` - GUI application settings
+- `scripts/` - Utility scripts for dotfile management
+EOF</div>
+
+<h2>Automation Scripts</h2>
+
+<p><strong>Update Script</strong></p>
+<div class="command-block">#!/bin/bash
+# update-dotfiles.sh - Keep your home directory symlinked to dotfiles repo
+
+REPO_PATH="$HOME/projects/dotfiles"
+BACKUP_DIR="$HOME/dotfiles_backup"
+
+timestamp=$(date +%Y%m%d_%H%M%S)
+mkdir -p "$BACKUP_DIR/$timestamp"
+
+# Backup current dotfiles (excluding symlinks)
+echo "Creating backup of current dotfiles..."
+for file in ~/.bashrc ~/.zshrc ~/.bash_profile ~/.vimrc ~/.screenrc ~/.tmux.conf; do
+    if [ -L "$file" ]; then
+        # It's a symlink, skip
+        continue
+    fi
+    cp -a "$file" "$BACKUP_DIR/$timestamp/"
+done
+
+# Update symlinks
+echo "Updating symlinks..."
+for file in "$REPO_PATH"/.*; do
+    filename=$(basename "$file")
+    if [ -f "$file" ] && [ ! -L "~$filename" ]; then
+        ln -sf "$file" "~$filename"
+        echo "Symlinked ~$filename"
+    fi
+done
+
+echo "Dotfiles updated successfully!"
+echo "Backup available in: $BACKUP_DIR/$timestamp"</div>
+
+<p><strong>Commit Template</strong></p>
+<div class="command-block">#!/bin/bash
+# commit-dotfiles.sh - Commit changes with proper formatting
+
+# Add all changed files
+for file in ~/.bashrc ~/.zshrc ~/.bash_profile ~/.vimrc ~/.screenrc ~/.tmux.conf; do
+    if [ -e "~/projects/dotfiles/$(basename "$file")" ]; then
+        git add "~/projects/dotfiles/$(basename "$file")"
+    fi
+done
+
+# Create commit message with timestamp
+git add -A
+timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+
+git commit -m "Update dotfiles - $timestamp" \
+    -m "Changes to shell, editor, and terminal configurations"
+
+# Push to remote (if configured)
+git push origin main</div>
+
+<h2>Directory Structure Example</h2>
+
+<div class="dotfile-list">
+<div class="dotfile-item">
+<div class="dotfile-icon config-icon"></div>
+<div><strong>config/shell/.bashrc</strong> - Bash shell configuration</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon bashrc-icon">⌗</div>
+<div><strong>config/shell/.zshrc</strong> - Zsh shell configuration (if using zsh)</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon editor-icon">◎</div>
+<div><strong>config/editor/.vimrc</strong> - Vim editor configuration</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon editor-icon">◎</div>
+<div><strong>config/editor/init.vim</strong> - Neovim configuration</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon config-icon"></div>
+<div><strong>config/gui/wezterm.lua</strong> - Terminal theme and settings</div>
+</div>
+<div class="dotfile-item">
+<div class="dotfile-icon config-icon"></div>
+<div><strong>config/gui/settings.json</strong> - VS Code or other IDE settings</div>
+</div>
+</div>
+
+<h2>Security and Best Practices</h2>
+
+<p><strong>Exclude Sensitive Data</strong></p>
+<p>Never commit passwords, API keys, or other sensitive information. Use a comprehensive .gitignore:</p>
+
+<div class="command-block"># Example .gitignore for dotfiles
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore temporary files
+*.swp
+*.swo
+*~
+
+# Ignore logs
+*.log
+
+# Ignore backups
+*backup*
+*~</div>
+
+<p><strong>Version Control Benefits</strong></p>
+<ul>
+<li><strong>Cross-machine portability</strong> - Your setup follows you from machine to machine</li>
+<li><strong>Version history</strong> - See changes to your configuration over time</li>
+<li><strong>Easy recovery</strong> - Quick restoration after system crashes or reinstallation</li>
+<li><strong>Collaboration</strong> - Share your perfect setup with others</li>
+<li><strong>Experimentation</strong> - Try new configurations without fear - just git reset</li>
+</ul>
+
+<h2>Final Steps</h2>
+
+<ol>
+<li><strong>Choose your setup method</strong> - Start with basic files, then add more as needed</li>
+<li><strong>Test thoroughly</strong> - Ensure your shell still works and editors function correctly</li>
+<li><strong>Create automation</strong> - Set up scripts to maintain your dotfiles easily</li>
+<li><strong>Document your changes</strong> - Write README or commit messages explaining configurations</li>
+<li><strong>Regular backups</strong> - Update your dotfiles repository periodically</li>
+</ol>
+
+<p>Backing up your dotfiles with Git is one of the most valuable investments you can make in your Linux workflow. It transforms hours of reconfiguration pain into a simple git checkout command, ensuring your development environment is always ready when you are.</p>
+
+<h2>Getting Started</h2>
+<p>Start with just your shell configuration (.bashrc) and build from there. The key is consistency - even backing up a few key files immediately gives you a safety net for the future.</p>
+</div>
+</main>
+
+<aside class="sidebar"><section class="side-widget"><h2>Search</h2><form class="search-form" id="search-form"><input type="search" id="search-input" placeholder="Search articles…" aria-label="Search articles"><button type="submit">Search</button></form></section><section class="side-widget"><h2>Categories</h2><div class="category-list"><button data-filter="Linux Basics"><span>♧</span> Linux Basics <b>12</b></button><button data-filter="Tutorials"><span>▧</span> Tutorials <b>18</b></button><button data-filter="System Admin"><span>▣</span> System Admin <b>15</b></button><button data-filter="DevOps"><span>♧</span> DevOps <b>11</b></button><button data-filter="Software"><span>▱</span> Software <b>9</b></button><button data-filter="Hardware"><span>▣</span> Hardware <b>7</b></button><button data-filter="Privacy"><span>▤</span> Privacy & Security <b>10</b></button><button data-filter="All"><span>＋</span> All articles <b>82</b></button></div></section><section class="side-widget popular-widget"><h2>Popular Posts</h2><a class="popular-post" href="terminal-commands.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=250&q=75" alt=""><b>1</b></span><span><strong>10 Essential Linux Commands Every Beginner Should Know</strong><small>▣ May 5, 2026</small></span></a><a class="popular-post" href="fedora-first-setup.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=250&q=75" alt=""><b>2</b></span><span><strong>A Calm, Practical Checklist for Setting Up Fedora</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="linux-app-formats.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=250&q=75" alt=""><b>3</b></span><span><strong>Flatpak, RPM, and AppImage Explained</strong><small>▣ April 20, 2026</small></span></a><a class="popular-post" href="faster-desktop.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=250&q=75" alt=""><b>4</b></span><span><strong>A Beginner&#39;s Guide to Linux System Performance</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="dotfiles-git.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=250&q=75" alt=""><b>5</b></span><span><strong>Back Up Your Dotfiles with Git</strong><small>◷ April 6, 2026</small></span></a></section></aside>
+
+<section class="about-bar" id="about"><div class="about-symbol">›_</div><div><h2>Technology should be understandable.</h2><p>Kernel & Craft shares practical Linux guides, open-source tools, and no-nonsense tech explainers.</p></div><a href="https://github.com/" target="_blank" rel="noopener noreferrer">Find us on GitHub ↗</a></section>
+</main>
+
+<footer class="site-footer"><div><a class="footer-brand" href="../">Kernel <i>&amp; Craft</i></a><span>© <span id="year">2026</span> Kernel & Craft. Built for curious minds.</span></div><div><a href="#about">About</a><a href="#privacy" id="privacy">Privacy</a><a href="mailto:hello@example.com">Contact</a><a href="#main">Back to top ↑</a></div></footer>
+
+<script src="../assets/magazine.js"></script>
+</body>
+</html>
