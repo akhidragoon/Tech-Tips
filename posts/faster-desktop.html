@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Linux tutorials, open-source tools, practical technology guides and honest explainers.">
+<meta name="theme-color" content="#101313">
+<title>A Beginner&#39;s Guide to Linux System Performance - Kernel & Craft</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/magazine.css">
+<style>
+.article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.performance-chart {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.metric-bar {
+    margin: 20px 0;
+}
+
+.metric-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.metric-fill {
+    height: 30px;
+    background: var(--green);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border-left: 4px solid #ff9800;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.dark-mode .tip-box {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+    color: #fff3e0;
+}
+
+.code-example {
+    background: #2d2d2d;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.metric-cpu { width: 85%; }
+.metric-memory { width: 85%; }
+.metric-disk { width: 60%; }
+.metric-network { width: 70%; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="trendbar"><div class="trend-inner"><span class="trend-label">TRENDING NOW</span><a href="../index.html">A Beginner&#39;s Guide to Linux System Performance</a><div class="trend-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="#privacy">Privacy Policy</a><a class="social" href="https://github.com/" aria-label="GitHub">◉</a><a class="social" href="https://x.com/" aria-label="X">𝕏</a></div></div></div>
+<header class="masthead"><div class="mast-inner"><a class="brand" href="../"><span class="brand-icon"><span>›_</span></span><span><strong>Kernel <i>&</i> Craft</strong><small>Linux Tutorials, Guides &amp; Tech Insights</small></span></a><a class="ad-banner" href="#latest"><span class="ad-terminal">›_</span><span class="ad-main"><b>Master Linux.</b><strong>One command at a time.</strong></span><span class="ad-copy">Practical tutorials and guides<br>for real-world use.</span><span class="ad-button">Explore Now <b>↗</b></span></a></div></header>
+<nav class="nav-bar" aria-label="Main navigation"><div class="nav-inner"><a class="home-link" href="../" aria-label="Home">⌂</a><div class="nav-items"><a href="#topics">Linux <span>⌄</span></a><a href="#latest">Tutorials <span>⌄</span></a><a href="#topics">System Admin <span>⌄</span></a><a href="#latest">DevOps <span>⌄</span></a><a href="#latest">Software</a><a href="#latest">Hardware</a><a href="#latest">News</a><a href="#topics">More <span>⌄</span></a></div><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark-mode">☾</button><button class="search-toggle" id="search-toggle" aria-label="Focus search">⌕</button><button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></div></nav>
+
+<main id="main" class="page-wrap">
+<div class="article-content">
+<span class="category-pill">SYSTEM ADMIN</span>
+<h1>A Beginner&#39;s Guide to Linux System Performance</h1>
+<div class="meta-light"><span>◷ April 28, 2026</span><span>● Kernel & Craft</span><span>◉ 6 min read</span></div>
+
+<img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=85" alt="Linux system monitoring">
+
+<p>Understanding your Linux system's performance is crucial for maintaining a healthy, responsive machine. Whether you're troubleshooting slowdowns, optimizing for specific workloads, or just curious about how your system performs, these fundamental monitoring tools and techniques will help you become more effective at system administration.</p>
+
+<div class="performance-chart">
+<h3>Typical System Resource Usage</h3>
+<div class="metric-bar">
+<div class="metric-label"><span>CPU Usage</span><span>85%</span></div>
+<div class="metric-fill metric-cpu">CPU Usage 85%</div>
+</div>
+<div class="metric-bar">
+<div class="metric-label"><span>Memory Usage</span><span>85%</span></div>
+<div class="metric-fill metric-memory">Memory Usage 85%</div>
+</div>
+<div class="metric-bar">
+<div class="metric-label"><span>Disk I/O</span><span>60%</span></div>
+<div class="metric-fill metric-disk">Disk I/O 60%</div>
+</div>
+<div class="metric-bar">
+<div class="metric-label"><span>Network Activity</span><span>70%</span></div>
+<div class="metric-fill metric-network">Network Activity 70%</div>
+</div>
+</div>
+
+<h2>Essential Monitoring Commands</h2>
+
+<p><strong>1. Top (Interactive Process Viewer)</strong></p>
+<div class="code-example">top
+# Or for cleaner output
+htop
+# Sort by CPU usage: P
+# Sort by memory usage: M
+# Kill process: k (PID)</div>
+
+<p><strong>2. System Resource Overview</strong></p>
+<div class="code-example"># CPU information
+lscpu
+
+# Memory information
+free -h
+
+# Disk usage
+df -h
+
+# Network statistics
+ip addr show
+netstat -tulnp
+ss -tulnp</div>
+
+<p><strong>3. Process Management</strong></p>
+<div class="code-example"># Find processes using resources
+ps aux --sort=-%cpu | head -10
+ps aux --sort=-%mem | head -10
+
+# Monitor specific command
+watch -n 2 "ps aux | grep firefox"
+
+# Check zombie processes
+ps -Z</div>
+
+<p><strong>4. File System Analysis</strong></p>
+<div class="code-example"># See what's using disk space
+du -sh /*
+sudo du -sh /var/log
+
+# Find large files
+find / -type f -size +100M 2>/dev/null | head -10
+
+# Monitor disk I/O
+iostat 1 5
+df -i</div>
+
+<p><strong>5. Network Performance</strong></p>
+<div class="code-example"># Check network bandwidth
+sar -n DEV 1 5
+iftop
+nethogs
+
+# Test network latency
+ping -c 5 8.8.8.8
+mtr 8.8.8.8
+# Or for IPv6
+ping6 -c 5 2001:4860:4860::8888</div>
+
+<h2>Understanding Performance Metrics</h2>
+
+<div class="tip-box">
+<strong>Performance Tips:</strong>
+<ul>
+<li><strong>CPU:</strong> Sustained usage above 80% indicates potential bottlenecks. Consider optimizing background services or upgrading hardware.</li>
+<li><strong>Memory:</strong> Swap usage above 20% suggests memory pressure. Adding more RAM or optimizing memory-heavy applications helps.</li>
+<li><strong>Disk:</strong> I/O above 70% means storage is saturated. Consider SSDs, disk cleanup, or storage expansion.</li>
+<li><strong>Network:</strong> High latency above 200ms affects user experience. Check for network congestion or ISP issues.</li>
+</ul>
+</div>
+
+<p><strong>CPU Usage</strong> measures how much processing power your applications are consuming. 100% on a multi-core system means all cores are busy.</p>
+
+<p><strong>Memory Usage</strong> includes both used RAM and cached memory. Linux caches file data in RAM for faster access, so high usage isn't always bad.</p>
+
+<p><strong>Disk I/O</strong> represents read/write operations. Mechanical hard drives show more variation than SSDs.</p>
+
+<p><strong>Network Activity</strong> shows data transfer rates. Both upload and download rates matter for different use cases.</p>
+
+<h2>Pro Tips for Better Performance Monitoring</h2>
+
+<p><strong>Set Up Alerts</strong></p>
+<div class="code-example"># Create a monitoring script
+cat > monitor.sh << 'EOF'
+#!/bin/bash
+
+# Check CPU usage
+CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)
+
+# Check memory usage
+MEM_USAGE=$(free | grep Mem | awk '{printf "%.0f", ($3/$2) * 100.0}')
+
+# Alert if usage is high
+if [ "$CPU_USAGE" -gt 80 ] || [ "$MEM_USAGE" -gt 80 ]; then
+    echo "⚠️ High usage detected! CPU: $CPU_USAGE%, Memory: $MEM_USAGE%"
+    # Add notification or logging here
+fi
+EOF
+
+chmod +x monitor.sh
+# Add to crontab for regular monitoring
+(crontab -l 2>/dev/null; echo "*/5 * * * * /home/user/monitor.sh") | crontab -</div>
+
+<p><strong>Use Graphical Tools</strong></p>
+<div class="code-example"># For desktop environments
+gnome-system-monitor
+ksysguard
+psensor
+# Or web-based monitoring
+# grafana (install with: sudo apt install grafana)
+# prometheus (install with: sudo apt install prometheus)</div>
+
+<h2>When to Take Action</h2>
+
+<p><strong>Immediate Action Required</strong> (critical issues):
+- CPU usage consistently above 95% for extended periods
+- Memory swap usage above 50%
+- Disk usage above 90%
+- Network latency above 500ms for long durations</p>
+
+<p><strong>Investigate Soon</strong> (warning signs):
+- CPU usage frequently above 80%
+- Memory usage above 85%
+- Disk I/O above 70%
+- Network latency above 200ms</p>
+
+<p><strong>Monitor Regularly</strong> (maintenance):
+- Daily system overview
+- Weekly performance reports
+- Monthly capacity planning</p>
+
+<h2>Final Checklist</h2>
+<ul>
+<li>✓ Install and configure monitoring tools</li>
+<li>✓ Set up regular monitoring schedules</li>
+<li>✓ Define alert thresholds based on your use case</li>
+<li>✓ Regularly review performance trends</li>
+<li>✓ Keep monitoring tools updated</li>
+</ul>
+
+<p>By mastering these fundamental monitoring tools and understanding the key metrics, you'll be equipped to keep your Linux system running smoothly and efficiently, whether you're managing a single machine or multiple servers.</p>
+
+<h2>Resources</h2>
+<p>For more advanced monitoring, explore tools like Grafana for visualization, Prometheus for metrics collection, or check out system-specific optimizations based on your distribution.</p>
+</div>
+</main>
+
+<aside class="sidebar"><section class="side-widget"><h2>Search</h2><form class="search-form" id="search-form"><input type="search" id="search-input" placeholder="Search articles…" aria-label="Search articles"><button type="submit">Search</button></form></section><section class="side-widget"><h2>Categories</h2><div class="category-list"><button data-filter="Linux Basics"><span>♧</span> Linux Basics <b>12</b></button><button data-filter="Tutorials"><span>▧</span> Tutorials <b>18</b></button><button data-filter="System Admin"><span>▣</span> System Admin <b>15</b></button><button data-filter="DevOps"><span>♧</span> DevOps <b>11</b></button><button data-filter="Software"><span>▱</span> Software <b>9</b></button><button data-filter="Hardware"><span>▣</span> Hardware <b>7</b></button><button data-filter="Privacy"><span>▤</span> Privacy & Security <b>10</b></button><button data-filter="All"><span>＋</span> All articles <b>82</b></button></div></section><section class="side-widget popular-widget"><h2>Popular Posts</h2><a class="popular-post" href="terminal-commands.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=250&q=75" alt=""><b>1</b></span><span><strong>10 Essential Linux Commands Every Beginner Should Know</strong><small>▣ May 5, 2026</small></span></a><a class="popular-post" href="fedora-first-setup.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=250&q=75" alt=""><b>2</b></span><span><strong>A Calm, Practical Checklist for Setting Up Fedora</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="linux-app-formats.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=250&q=75" alt=""><b>3</b></span><span><strong>Flatpak, RPM, and AppImage Explained</strong><small>▣ April 20, 2026</small></span></a><a class="popular-post" href="faster-desktop.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=250&q=75" alt=""><b>4</b></span><span><strong>A Beginner&#39;s Guide to Linux System Performance</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="dotfiles-git.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=250&q=75" alt=""><b>5</b></span><span><strong>Back Up Your Dotfiles with Git</strong><small>◷ April 6, 2026</small></span></a></section></aside>
+
+<section class="about-bar" id="about"><div class="about-symbol">›_</div><div><h2>Technology should be understandable.</h2><p>Kernel & Craft shares practical Linux guides, open-source tools, and no-nonsense tech explainers.</p></div><a href="https://github.com/" target="_blank" rel="noopener noreferrer">Find us on GitHub ↗</a></section>
+</main>
+
+<footer class="site-footer"><div><a class="footer-brand" href="../">Kernel <i>&amp; Craft</i></a><span>© <span id="year">2026</span> Kernel & Craft. Built for curious minds.</span></div><div><a href="#about">About</a><a href="#privacy" id="privacy">Privacy</a><a href="mailto:hello@example.com">Contact</a><a href="#main">Back to top ↑</a></div></footer>
+
+<script src="../assets/magazine.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Linux tutorials, open-source tools, practical technology guides and honest explainers.">
+<meta name="theme-color" content="#101313">
+<title>10 Essential Linux Commands Every Beginner Should Know - Kernel & Craft</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/magazine.css">
+<style>
+.article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.code-block {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: monospace;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.command-list {
+    list-style: none;
+    counter-reset: command;
+    margin: 30px 0;
+}
+
+.command-list li {
+    margin: 15px 0;
+    padding-left: 60px;
+    position: relative;
+}
+
+.command-list li::before {
+    counter-increment: command;
+    content: counter(command);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--green);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-left: 4px solid var(--green);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.dark-mode .tip-box {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: #e8f5e9;
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="trendbar"><div class="trend-inner"><span class="trend-label">TRENDING NOW</span><a href="../index.html">10 Essential Linux Commands Every Beginner Should Know</a><div class="trend-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="#privacy">Privacy Policy</a><a class="social" href="https://github.com/" aria-label="GitHub">◉</a><a class="social" href="https://x.com/" aria-label="X">𝕏</a></div></div></div>
+<header class="masthead"><div class="mast-inner"><a class="brand" href="../"><span class="brand-icon"><span>›_</span></span><span><strong>Kernel <i>&</i> Craft</strong><small>Linux Tutorials, Guides &amp; Tech Insights</small></span></a><a class="ad-banner" href="#latest"><span class="ad-terminal">›_</span><span class="ad-main"><b>Master Linux.</b><strong>One command at a time.</strong></span><span class="ad-copy">Practical tutorials and guides<br>for real-world use.</span><span class="ad-button">Explore Now <b>↗</b></span></a></div></header>
+<nav class="nav-bar" aria-label="Main navigation"><div class="nav-inner"><a class="home-link" href="../" aria-label="Home">⌂</a><div class="nav-items"><a href="#topics">Linux <span>⌄</span></a><a href="#latest">Tutorials <span>⌄</span></a><a href="#topics">System Admin <span>⌄</span></a><a href="#latest">DevOps <span>⌄</span></a><a href="#latest">Software</a><a href="#latest">Hardware</a><a href="#latest">News</a><a href="#topics">More <span>⌄</span></a></div><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☾</button><button class="search-toggle" id="search-toggle" aria-label="Focus search">⌕</button><button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></div></nav>
+
+<main id="main" class="page-wrap">
+<div class="article-content">
+<span class="category-pill">LINUX BASICS</span>
+<h1>10 Essential Linux Commands Every Beginner Should Know</h1>
+<div class="meta-light"><span>▣ May 5, 2026</span><span>● Kernel & Craft</span><span>◉ 5 min read</span></div>
+
+<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=85" alt="Linux terminal with commands">
+
+<p>Mastering the command line is one of the most valuable skills a Linux user can have. The terminal gives you direct access to your system's power and is how developers, system administrators, and power users control everything from file operations to system monitoring. Here are the 10 essential commands every beginner should know.</p>
+
+<ul class="command-list">
+<li><strong>ls</strong> - List directory contents. Use <code>ls -la</code> for detailed view with permissions and hidden files.</li>
+<li><strong>cd</strong> - Change directories. Use <code>cd ..</code> to go up one level or <code>cd ~</code> to return to home directory.</li>
+<li><strong>cat</strong> - Display file contents. Combine with <code>grep</code> for searching: <code>cat file.txt | grep "search term"</code></li>
+<li><strong>cp</strong> - Copy files and directories. Use <code>cp source destination</code> to duplicate files.</li>
+<li><strong>mv</code> - Move or rename files. Use <code>mv oldname newname</code> to rename or <code>mv file folder</code> to move.</li>
+<li><strong>rm</strong> - Remove files or directories. Use <code>rm -rf</code> to force delete directories (use with caution</li>
+<li><strong>mkdir</strong> - Create directories. Add <code>mkdir -p</code> to create parent directories as needed.</li>
+<li><strong>sudo</strong> - Execute commands with another user's permissions, typically root. Essential for system administration.</li>
+<li><strong>ps aux</strong> - List running processes. Use <code>ps aux | grep processname</code> to find specific processes.</li>
+<li><strong>chmod</strong> - Change file permissions. Common patterns: <code>chmod 755 file</code> or <code>chmod +x script.sh</code></li>
+</ul>
+
+<div class="tip-box">
+<strong>Pro Tip:</strong> Create an alias for <code>ls -la</co> in your .bashrc or .zshrc to always see detailed listings:
+<div class="code-block">alias lsa='ls -la'</div>
+</div>
+
+<p>These commands form the foundation of Linux system administration. Practice them regularly, and you'll quickly develop the muscle memory needed to work efficiently in any Linux environment.</p>
+
+<p>Remember: Always be cautious when using <code>rm -rf</code> and <code>sudo</code> commands, as they can cause irreversible damage if misused.</p>
+
+<h2>Further Reading</h2>
+<p>For more comprehensive Linux command tutorials, check out our other articles on system administration and DevOps topics.</p>
+</div>
+</main>
+
+<aside class="sidebar"><section class="side-widget"><h2>Search</h2><form class="search-form" id="search-form"><input type="search" id="search-input" placeholder="Search articles…" aria-label="Search articles"><button type="submit">Search</button></form></section><section class="side-widget"><h2>Categories</h2><div class="category-list"><button data-filter="Linux Basics"><span>♧</span> Linux Basics <b>12</b></button><button data-filter="Tutorials"><span>▧</span> Tutorials <b>18</b></button><button data-filter="System Admin"><span>▣</span> System Admin <b>15</b></button><button data-filter="DevOps"><span>♧</span> DevOps <b>11</b></button><button data-filter="Software"><span>▱</span> Software <b>9</b></button><button data-filter="Hardware"><span>▣</span> Hardware <b>7</b></button><button data-filter="Privacy"><span>▤</span> Privacy & Security <b>10</b></button><button data-filter="All"><span>＋</span> All articles <b>82</b></button></div></section><section class="side-widget popular-widget"><h2>Popular Posts</h2><a class="popular-post" href="terminal-commands.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=250&q=75" alt=""><b>1</b></span><span><strong>10 Essential Linux Commands Every Beginner Should Know</strong><small>▣ May 5, 2026</small></span></a><a class="popular-post" href="fedora-first-setup.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=250&q=75" alt=""><b>2</b></span><span><strong>A Calm, Practical Checklist for Setting Up Fedora</strong><small>▣ April 28, 2026</small></span></a><a class="popular-post" href="linux-app-formats.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=250&q=75" alt=""><b>3</b></span><span><strong>Flatpak, RPM, and AppImage Explained</strong><small>▣ April 20, 2026</small></span></a><a class="popular-post" href="faster-desktop.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=250&q=75" alt=""><b>4</b></span><span><strong>A Beginner&#39;s Guide to Linux System Performance</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="dotfiles-git.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=250&q=75" alt=""><b>5</b></span><span><strong>Back Up Your Dotfiles with Git</strong><small>◷ April 6, 2026</small></span></a></section></aside>
+
+<section class="about-bar" id="about"><div class="about-symbol">›_</div><div><h2>Technology should be understandable.</h2><p>Kernel & Craft shares practical Linux guides, open-source tools, and no-nonsense tech explainers.</p></div><a href="https://github.com/" target="_blank" rel="noopener noreferrer">Find us on GitHub ↗</a></section>
+</main>
+
+<footer class="site-footer"><div><a class="footer-brand" href="../">Kernel <i>&amp; Craft</i></a><span>© <span id="year">2026</span> Kernel & Craft. Built for curious minds.</span></div><div><a href="#about">About</a><a href="#privacy" id="privacy">Privacy</a><a href="mailto:hello@example.com">Contact</a><a href="#main">Back to top ↑</a></div></footer>
+
+<script src="../assets/magazine.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Linux tutorials, open-source tools, practical technology guides and honest explainers.">
+<meta name="theme-color" content="#101313">
+<title>A Calm, Practical Checklist for Setting Up Fedora - Kernel & Craft</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/magazine.css">
+<style>
+.article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+.checklist {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.checklist h3 {
+    color: var(--green);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.checklist-item input[type="checkbox"] {
+    margin-top: 3px;
+    transform: scale(1.2);
+}
+
+.checklist-item.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-left: 4px solid #2196f3;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="trendbar"><div class="trend-inner"><span class="trend-label">TRENDING NOW</span><a href="../index.html">A Calm, Practical Checklist for Setting Up Fedora</a><div class="trend-links"><a href="#about">About</a><a href="mailto:hello@example.com">Contact</a><a href="#privacy">Privacy Policy</a><a class="social" href="https://github.com/" aria-label="GitHub">◉</a><a class="social" href="https://x.com/" aria-label="X">𝕏</a></div></div></div>
+<header class="masthead"><div class="mast-inner"><a class="brand" href="../"><span class="brand-icon"><span>›_</span></span><span><strong>Kernel <i>&</i> Craft</strong><small>Linux Tutorials, Guides &amp; Tech Insights</small></span></a><a class="ad-banner" href="#latest"><span class="ad-terminal">›_</span><span class="ad-main"><b>Master Linux.</b><strong>One command at a time.</strong></span><span class="ad-copy">Practical tutorials and guides<br>for real-world use.</span><span class="ad-button">Explore Now <b>↗</b></span></a></div></header>
+<nav class="nav-bar" aria-label="Main navigation"><div class="nav-inner"><a class="home-link" href="../" aria-label="Home">⌂</a><div class="nav-items"><a href="#topics">Linux <span>⌄</span></a><a href="#latest">Tutorials <span>⌄</span></a><a href="#topics">System Admin <span>⌄</span></a><a href="#latest">DevOps <span>⌄</span></a><a href="#latest">Software</a><a href="#latest">Hardware</a><a href="#latest">News</a><a href="#topics">More <span>⌄</span></a></div><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☾</button><button class="search-toggle" id="search-toggle" aria-label="Focus search">⌕</button><button class="mobile-menu" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></div></nav>
+
+<main id="main" class="page-wrap">
+<div class="article-content">
+<span class="category-pill">SYSTEM ADMIN</span>
+<h1>A Calm, Practical Checklist for Setting Up Fedora</h1>
+<div class="meta-light"><span>◷ April 28, 2026</span><span>● Kernel & Craft</span><span>◉ 8 min read</span></div>
+
+<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=85" alt="Fedora desktop setup">
+
+<p>Setting up a new Linux distribution can be overwhelming, especially Fedora with its many options and modern features. A systematic approach helps ensure you end up with a functional, personalized system without feeling overwhelmed. Here's a calm, practical checklist to guide you through the process.</p>
+
+<div class="checklist">
+<h3><span>◷</span> Initial Setup</h3>
+<div class="checklist-item">
+<input type="checkbox" id="update-firmware"> <label for="update-firmware"><strong>Update firmware</strong> - Ensure hardware compatibility and latest features</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="create-user"> <label for="create-user"><strong>Create primary user account</strong> - Separate from root for security</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="set-language"> <label for="set-language"><strong>Set preferred language and region</strong> - Make the system feel native</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="install-network"> <label for="install-network"><strong>Verify network connectivity</strong> - Test internet access and drivers</label>
+</div>
+</div>
+
+<div class="checklist">
+<h3><span>◷</span> Essential Software</h3>
+<div class="checklist-item">
+<input type="checkbox" id="code-editor"> <label for="code-editor"><strong>Install code editor</strong> - VS Code, Vim, or Neovim for development</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="terminal-themes"> <label for="terminal-themes"><strong>Configure terminal themes</strong> - Make your workspace pleasant</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="fonts"> <label for="fonts"><strong>Install good fonts</strong> - Better readability and aesthetics</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="multi-media"> <label for="multi-media"><strong>Add multimedia codecs</strong> - Play your media files without issues</label>
+</div>
+</div>
+
+<div class="checklist">
+<h3><span>◷</span> System Optimization</h3>
+<div class="checklist-item">
+<input type="checkbox" id="swap-configuration"> <label for="swap-configuration"><strong>Configure swap space</strong> - Ensure system stability</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="boot-optimization"> <label for="boot-optimization"><strong>Optimize boot performance</strong> - Faster startup times</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="autologin"> <label for="autologin"><strong>Set up automatic login</strong> - Convenience for daily use</label>
+</div>
+<div class="checklist-item">
+<input type="checkbox" id="file-manager"> <label for="file-manager"><strong>Configure file manager</strong> - Dolphin, Nautilus, or equivalent</label>
+</div>
+</div>
+
+<div class="tip-box">
+<strong>Pro Tip:</strong> Take screenshots of your initial setup process! It's amazing to look back at your first impressions and track your journey from fresh install to personalized workstation.
+</div>
+
+<p>This checklist approach helps break down a potentially intimidating process into manageable steps. Don't rush through it - take time to understand each option and make choices that work for your workflow and preferences.</p>
+
+<h2>Final Thoughts</h2>
+<p>Every system is unique, and the "perfect" Fedora setup varies from person to person. Use this as a guide rather than a rigid prescription. The goal is to end up with a system that feels natural and serves your needs efficiently.</p>
+</div>
+</main>
+
+<aside class="sidebar"><section class="side-widget"><h2>Search</h2><form class="search-form" id="search-form"><input type="search" id="search-input" placeholder="Search articles…" aria-label="Search articles"><button type="submit">Search</button></form></section><section class="side-widget"><h2>Categories</h2><div class="category-list"><button data-filter="Linux Basics"><span>♧</span> Linux Basics <b>12</b></button><button data-filter="Tutorials"><span>▧</span> Tutorials <b>18</b></button><button data-filter="System Admin"><span>▣</span> System Admin <b>15</b></button><button data-filter="DevOps"><span>♧</span> DevOps <b>11</b></button><button data-filter="Software"><span>▱</span> Software <b>9</b></button><button data-filter="Hardware"><span>▣</span> Hardware <b>7</b></button><button data-filter="Privacy"><span>▤</span> Privacy & Security <b>10</b></button><button data-filter="All"><span>＋</span> All articles <b>82</b></button></div></section><section class="side-widget popular-widget"><h2>Popular Posts</h2><a class="popular-post" href="terminal-commands.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=250&q=75" alt=""><b>1</b></span><span><strong>10 Essential Linux Commands Every Beginner Should Know</strong><small>▣ May 5, 2026</small></span></a><a class="popular-post" href="fedora-first-setup.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=250&q=75" alt=""><b>2</b></span><span><strong>A Calm, Practical Checklist for Setting Up Fedora</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="linux-app-formats.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=250&q=75" alt=""><b>3</b></span><span><strong>Flatpak, RPM, and AppImage Explained</strong><small>▣ April 20, 2026</small></span></a><a class="popular-post" href="faster-desktop.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=250&q=75" alt=""><b>4</b></span><span><strong>A Beginner&#39;s Guide to Linux System Performance</strong><small>◷ April 28, 2026</small></span></a><a class="popular-post" href="dotfiles-git.html"><span class="popular-thumb"><img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=250&q=75" alt=""><b>5</b></span><span><strong>Back Up Your Dotfiles with Git</strong><small>◷ April 6, 2026</small></span></a></section></aside>
+
+<section class="about-bar" id="about"><div class="about-symbol">›_</div><div><h2>Technology should be understandable.</h2><p>Kernel & Craft shares practical Linux guides, open-source tools, and no-nonsense tech explainers.</p></div><a href="https://github.com/" target="_blank" rel="noopener noreferrer">Find us on GitHub ↗</a></section>
+</main>
+
+<footer class="site-footer"><div><a class="footer-brand" href="../">Kernel <i>&amp; Craft</i></a><span>© <span id="year">2026</span> Kernel & Craft. Built for curious minds.</span></div><div><a href="#about">About</a><a href="#privacy" id="privacy">Privacy</a><a href="mailto:hello@example.com">Contact</a><a href="#main">Back to top ↑</a></div></footer>
+
+<script src="../assets/magazine.js"></script>
+</body>
+</html>
